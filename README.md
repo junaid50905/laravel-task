@@ -1,7 +1,8 @@
 ## laravel-task
 
 ## CRUD with laravel
-##### 1/ create a form
+
+#### 1/ create a form
 ```
 @extends('backend.layouts.master')
 
@@ -28,4 +29,88 @@
 ```
 ##### action=route('product.store)-------->
 ##### input name should be same as database table column name
+
+
+#### 2/ web.php
+```
+Route::post('/product/store', [ProductController::class, 'store'])->name('product.store');
+```
+
+#### 3/ ProductController.php
+```
+public function store(Request $request)
+    {
+        $new_product = $request->all();
+        Product::create($new_product);
+        return redirect()->route('product.list');
+    }
+```
+
+#### 4/ app/Models/Product.php
+```
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Product extends Model
+{
+    use HasFactory;
+    protected $table = 'products';
+    protected $fillable = ['product_name', 'product_description', 'product_price'];
+}
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
